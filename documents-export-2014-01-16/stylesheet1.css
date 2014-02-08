@@ -1,0 +1,73 @@
+#output {
+	position: relative;
+	height: 50%;
+	line-height: 2px;
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	border: solid red;
+	border-top-width: 2px;
+	border-bottom-width: 1px;
+	border-left-width: 2px;
+	border-right-width: 2px;
+	background-color: #C0C0C0;
+	color: #8B0000;
+	font-family: courier;
+	padding-right: 5px;
+		
+
+}
+
+#output p {
+	text-align: right;
+
+}
+
+
+
+
+#keypad {
+	position: relative;
+	height: 50%;
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid red;
+	padding: 10px;
+	background-color: #ADD8E6
+
+
+}
+
+
+.number {
+    	height: 20%;
+	width:	20%;
+	color: #8B0000;
+	font-family: courier;
+	text-align: center;
+	background-color: #C0C0C0;
+	border:thick #00BFFF;
+	border-style: outset;
+	display: inline-block;
+	border-radius: 15%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	
+}
+
+.operator {
+    	height: 20%;
+	width:	20%;
+	font-family: courier;
+	color: #8B0000;
+	text-align: center;
+	background-color: #C0C0C0;
+	border:thick #00BFFF;
+	border-style: outset;
+	display: inline-block;
+	border-radius: 15%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+

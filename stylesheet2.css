@@ -1,0 +1,72 @@
+body {
+		font-family: sans-serif;
+		width: 1200px;
+		margin: 0 auto;
+		padding: 10px;
+}
+
+#input {
+		right: 0px;
+		width: 160px;
+		background-color: #D0D0D0;
+		border: solid 1px black;
+		padding: 5px;
+		display: inline-block;
+		vertical-align: top;
+
+}
+
+#Phase{
+		float: right;
+		width: 62px;
+		height: 22px;
+		
+		
+}
+
+
+
+#qi {
+		float: right;
+		width: 95px;
+	
+}	
+
+#Units {
+		float: right;
+		width: 100px;
+	
+}	
+
+#b {
+		float: right;
+		width: 62px;
+	
+}	
+
+#Decline {
+		float: right;
+		width: 62px;
+	
+}	
+
+#Terminal {
+		float: right;
+		width: 62px;
+	
+}
+
+#calc {
+		float: Left;
+		width: 80px;
+		height: 45px;
+	
+}	
+
+#graph {
+		margin-left:10px;
+		width: 800px;
+		height: 600px;
+		border: solid 1px black;
+		display: inline-block;
+}

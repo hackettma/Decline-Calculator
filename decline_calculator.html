@@ -1,0 +1,129 @@
+<!doctype html>
+	<html>
+		<head>
+		<link type = "text/css" rel="stylesheet" href = "stylesheet2.css">
+		
+		<script type = "text/javascript" src="https://www.google.com/jsapi"></script>	
+		<script type="text/javascript">
+	google.load('visualization', '1.0', {'packages':['corechart']});
+	google.setOnLoadCallback(drawChart);
+	function drawChart() {
+		
+		var data = new google.visualization.DataTable(curve.build_segment("Oil", 100, '2014-01-01', 1.65, 65, 7, 10));
+		var options = {'title':'Volumes','width':800,'height':600};
+		var chart = new google.visualization.LineChart(document.getElementById('graph'));
+        	chart.draw(data, options);
+	};
+	
+	function Column(id, label, type) {this.id=id; this.label=label; this.type=type;};
+	function Row() {};
+	function Cell(v) {this.v = v;}
+	
+	var curve = {
+		data_tbl: {cols: [], rows: [] },
+		
+		
+		
+		
+
+		build_segment: function(Phase, Qi, start_dt, b_factor, decline_i, dec_term, term) {
+			days_per_month = 30.4;
+			rate_initial = parseFloat(Qi);  //required data for formula
+			rate = parseFloat(Qi);		//while loop counter for now
+			//dt = new Date(start_dt.split("-")[0],start_dt.split("-")[1]-1,start_dt.split("-")[2]);
+			b_fac = parseFloat(b_factor);
+			decline_initial = parseFloat(decline_i)/100;
+			nom_decline_numerator = (Math.pow((1 - decline_initial), (-1 * b_fac)) - 1);
+			nom_decline = nom_decline_numerator / b_fac;
+			month = 0;
+	
+			if (Phase === "Oil"){
+				col1 = new Column("Date", "Month", 'date');
+				curve.data_tbl.cols.push(col1);
+				col2 = new Column(Phase, Phase +" (Oil/BBLS)", 'number');
+				curve.data_tbl.cols.push(col2);
+				while (rate > parseFloat(term)) {
+					row1 = new Row();
+					row1.c = [];
+					row1.c.push(new Cell(new Date(start_dt.split("-")[0],start_dt.split("-")[1]-1 + month,start_dt.split("-")[2])));
+					row1.c.push(new Cell(rate * days_per_month));
+					curve.data_tbl.rows.push(row1);
+				
+					month += 1;
+					rate = rate_initial / Math.pow(1 + b_fac * (month / 12) * nom_decline, (1/b_fac));
+				
+				}
+
+
+			}
+			else {
+				console.log("Feature not implemented yet!");
+			} //eventually same loop for other phases		
+	
+		return curve.data_tbl;
+		}	
+	};
+	
+	
+		</script>
+		<title>Simple Decline Graphing Calculator</title>
+		</head>
+
+		<body>
+		
+			<div id=input>
+			
+			
+			<label>Phase:</label>
+			<select id="Phase">
+			<option>Oil</option>
+			<option>Gas</option>
+			<option>Water</option>
+			</select>
+			<hr>
+			
+			<label>Qi:</label>
+			<input id="qi" type="number" min="0" max="500000">
+			<hr>
+
+			<label>Units:</label>
+			<select id="Units">
+			<option>BBLS/Month</option>
+			<option>BBLS/DAY</option>
+			<option>MCF/MONTH</option>
+			<option>MCF/DAY</option>
+			</select>
+			<hr>
+			
+			<label>b-Factor:</label>
+			<input id="b_factor" type="number" min="0" max="2" step="0.01" value="0.0">
+			<hr>
+
+			<label>Decline%:</label>
+			<input id="Decline" type="number" min="0" max="200" step="1" value="0">
+			<hr>
+
+			<label>Terminal%:</label>
+			<input id="Terminal" type="number" min="0" max="200" step="1" value="0">
+			<hr>
+
+			<label>Start Date:</label>
+			<input id="start_dt" type="date">
+			<hr>
+
+			<button id="calc">Calculate</button>
+
+			</div>
+			<div id="graph"></div>
+			<div id="output"></div>
+			
+			
+
+			
+			
+			
+
+			
+
+		</body>
+	</html>
